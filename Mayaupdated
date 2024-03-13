@@ -1,0 +1,40 @@
+import datetime
+products = []
+
+
+def save_products(filename):
+    with open(filename, 'w') as file:
+        for product_id, info in products.items():
+            file.write(f"{product_id},{Name ['name']},{info['unit_price']},{info['stock']}\n")
+
+
+def load_products(filename):
+    try:
+        with open(filename, 'r') as file:
+            for line in file:
+                product_id, name, unit_price, stock = line.strip().split(',')
+                products[product_id] = {'name': name, 'unit_price': float(unit_price), 'stock': int(stock)}
+    except FileNotFoundError:
+        print("No product file found. Using default products.")
+
+
+def save_orders(filename):
+    with open(filename, 'w') as file:
+        for order in orders:
+            file.write(f"{order['order_id']},{order['order_date']},{order['customer_id']},{order['product_id']},{order['quantity']},{order['order_price']}\n")
+
+
+def load_orders(filename):
+    try:
+        with open(filename, 'r') as file:
+            for line in file:
+                order_id, order_date, customer_id, product_id, quantity, order_price = line.strip().split(',')
+                order_date = datetime.datetime.strptime(order_date, "%Y-%m-%d %H:%M:%S")
+                orders.append({'order_id': int(order_id), 'order_date': order_date, 'customer_id': customer_id, 'product_id': product_id, 'quantity': int(quantity), 'order_price': float(order_price)})
+    except FileNotFoundError:
+        print("No order file found. No orders to load.")
+
+
+#
+        
+
