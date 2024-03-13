@@ -29,7 +29,6 @@ def load_orders(filename):
         with open(filename, 'r') as file:
             for line in file:
                 order_id, order_date, customer_id, product_id, quantity, order_price = line.strip().split(',')
-                order_date = datetime.datetime.strptime(order_date, "%Y-%m-%d %H:%M:%S")
                 orders.append({'order_id': int(order_id), 'order_date': order_date, 'customer_id': customer_id, 'product_id': product_id, 'quantity': int(quantity), 'order_price': float(order_price)})
     except FileNotFoundError:
         print("No order file found. No orders to load.")
